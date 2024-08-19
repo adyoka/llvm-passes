@@ -93,4 +93,3 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib")
 # 4. ADD SUB-TARGETS
 #===============================================================================
 add_subdirectory(lib)
-add_subdirectory(tool)
