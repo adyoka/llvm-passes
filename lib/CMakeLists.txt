@@ -1,9 +1,29 @@
-add_library(OpcodeCounter SHARED
-  OpcodeCounter.cpp
+set(LLVM_PLUGINS
+    OpcodeCounter
+    InstrumentFuncCall
+    )
+
+set(OpcodeCounter_SOURCES
+  OpcodeCounter.cpp)
+set(InstrumentFuncCall_SOURCES
+  InstrumentFuncCall.cpp)
+
+foreach( plugin ${LLVM_PLUGINS} )
+  add_library(
+    ${plugin}
+    SHARED
+    ${${plugin}_SOURCES}
+    )
+
+  target_include_directories(
+    ${plugin}
+    PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/../include"
   )
 
-target_include_directories(OpcodeCounter PRIVATE
-  "${CMAKE_CURRENT_SOURCE_DIR}/../include"
-)
-target_link_libraries(OpcodeCounter
-  "$<$<PLATFORM_ID:Darwin>:-undefined dynamic_lookup>")
+  target_link_libraries(
+    ${plugin}
+    "$<$<PLATFORM_ID:Darwin>:-undefined dynamic_lookup>"
+    )
+endforeach()
+
