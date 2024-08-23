@@ -3,7 +3,7 @@
 //     DynamicCallCounterl.h
 //
 // DESCRIPTION:
-//     
+//     Header file that declares the Pass that prints dynamic function calls during run-time.
 //        
 //
 // DEVELOPED BY:
