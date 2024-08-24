@@ -3,6 +3,7 @@ set(LLVM_PLUGINS
     InstrumentFuncCall
     StaticCallCounter
     DynamicCallCounter
+    ArithmeticObfuscators
     )
 
 set(OpcodeCounter_SOURCES
@@ -13,6 +14,8 @@ set(StaticCallCounter_SOURCES
   StaticCallCounter.cpp)
 set(DynamicCallCounter_SOURCES
   DynamicCallCounter.cpp)
+set(ArithmeticObfuscators_SOURCES
+  ArithmeticObfuscators.cpp)
 
 foreach( plugin ${LLVM_PLUGINS} )
   add_library(
