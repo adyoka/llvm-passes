@@ -4,6 +4,7 @@ set(LLVM_PLUGINS
     StaticCallCounter
     DynamicCallCounter
     ArithmeticObfuscators
+    DeadCodeElimination
     )
 
 set(OpcodeCounter_SOURCES
@@ -16,6 +17,8 @@ set(DynamicCallCounter_SOURCES
   DynamicCallCounter.cpp)
 set(ArithmeticObfuscators_SOURCES
   ArithmeticObfuscators.cpp)
+set(DeadCodeElimination_SOURCES
+  DeadCodeElimination.cpp)
 
 foreach( plugin ${LLVM_PLUGINS} )
   add_library(
