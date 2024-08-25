@@ -37,9 +37,9 @@ static cl::opt<std::string> OutputModule("o", cl::Positional,
 
 
 static void eliminateDeadCode(Module &M) {
-    DeadCodeElimPass Pass;
+    // DeadCodeElimPass Pass; // error for some reason
     FunctionPassManager FPM;
-    FPM.addPass(Pass);
+    FPM.addPass(dce::DeadCodeElimPass());
 
     FunctionAnalysisManager FAM;
     PassBuilder PB;
