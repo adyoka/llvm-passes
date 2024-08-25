@@ -17,13 +17,14 @@ This project implements custom out-of-tree analysis and transformation passes an
 
 Implemented passes:
 
-| Name      | Description     |
-|[**OpcodeCounter**](lib/OpcodeCounter.cpp) | Conducts an analysis and prints a summary of LLVM IR opcodes in the input file |
-|[**InstrumentFuncCall**](lib/InstrumentFuncCall.cpp)| Prints function info for every function defined in the module by instrumenting printf call|
-|[**StaticCallCounter**](lib/StaticCallCounter.cpp) | Counts direct (static) function calls at compile-time |
-|[**DynamicCallCounter**](lib/DynamicCallCounter.cpp) | Counts direct (dynamic) function calls at run-time |
-|[**ArithmeticObfuscators**](lib/ArithmeticObfuscators.cpp) | Obfuscates integer `sub` and 8-bit integer `add` instructions by transforming into equal Mixed-Boolean-Arithmetic expressions|
-|[**DeadCodeElimination**](lib/DeadCodeElimination.cpp) | Removes obviously dead instructions and then newly dead code after the transformation | 
+| Name                                             | Description                                                                                       |
+|--------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| [**OpcodeCounter**](lib/OpcodeCounter.cpp)       | Conducts an analysis and prints a summary of LLVM IR opcodes in the input file                    |
+| [**InstrumentFuncCall**](lib/InstrumentFuncCall.cpp) | Prints function info for every function defined in the module by instrumenting `printf` call        |
+| [**StaticCallCounter**](lib/StaticCallCounter.cpp) | Counts direct (static) function calls at compile-time                                              |
+| [**DynamicCallCounter**](lib/DynamicCallCounter.cpp) | Counts direct (dynamic) function calls at run-time                                                 |
+| [**ArithmeticObfuscators**](lib/ArithmeticObfuscators.cpp) | Obfuscates integer `sub` and 8-bit integer `add` instructions by transforming into equal Mixed-Boolean-Arithmetic expressions |
+| [**DeadCodeElimination**](lib/DeadCodeElimination.cpp) | Removes obviously dead instructions and newly dead code after the transformation              |
 
 
 More passes are being added along the way.
@@ -48,7 +49,7 @@ cmkae --build .
 ### Run
 
 ```bash
-# Generate an LLVM file to analyze
+# Generate an input LLVM IR file (.ll)
 clang -emit-llvm -S ./inputs/input_file.c -o input_file.ll
 # Run the pass through opt
 opt -load-pass-plugin ./lib/<libPassName>.dylib --passes="pass-name" input_file.ll
@@ -63,7 +64,14 @@ The names for the pipeline `--passes=` are:
 * `mba-sub`                     - for ArithmeticObfuscatorSub pass
 * `mba-add`                     - for ArithmeticObfuscatorAdd pass
 
-##### Implementation
+Running standalone tools (dce, static_cc):
+
+```bash
+./bin/dce input.cc
+./bin/static_cc input.cc
+```
+
+#### Implementation
 
 You can find the implementation of the pass plugins in .cpp files inside `lib` directory and declaration in .h files insde 'include'.
 
