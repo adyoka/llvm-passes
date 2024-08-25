@@ -65,6 +65,8 @@ PreservedAnalyses StaticCallCounterPrinter::run(Module &M,ModuleAnalysisManager 
     }
 
     OS << "-------------------------------------------------\n";
+
+    return PreservedAnalyses::all();
 }
 
 
@@ -87,10 +89,6 @@ llvm::PassPluginLibraryInfo getStaticCallCounterPluginInfo() {
                     ArrayRef<PassBuilder::PipelineElement>) {
                   if (Name == "print<static-cc>") {
                     MPM.addPass(staticcallc::StaticCallCounterPrinter(llvm::errs()));
-                    return true;
-                  }
-                  if (Name == "static-cc") {
-                    MPM.addPass(staticcallc::StaticCallCounter());
                     return true;
                   }
                   return false;

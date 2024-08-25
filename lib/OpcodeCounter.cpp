@@ -76,10 +76,6 @@ PassPluginLibraryInfo getOpcodeCounterPluginInfo() {
                         FPM.addPass(opcodecounter::OpcodeCounterPrinter(errs()));
                         return true;
                     }
-                    if (Name == "opcode-counter") {
-                        FPM.addPass(opcodecounter::OpcodeCounter());
-                        return true;
-                    }
                     return false;
                 }
             );

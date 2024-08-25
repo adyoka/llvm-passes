@@ -17,6 +17,7 @@
 #include "llvm/IR/PassManager.h"
 #include "llvm/Pass.h"
 
+namespace obfuscator {
 
 struct MBASubTransform : public llvm::PassInfoMixin<MBASubTransform> {
   llvm::PreservedAnalyses run(llvm::Function &F, llvm::FunctionAnalysisManager &);
@@ -31,4 +32,6 @@ struct MBAAddTransform : public llvm::PassInfoMixin<MBAAddTransform> {
 
   static bool isRequired() { return true; }
 };
+
+}
 #endif

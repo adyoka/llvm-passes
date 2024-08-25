@@ -21,6 +21,8 @@
 #include "llvm/Transforms/Utils/AssumeBundleBuilder.h"
 #include "llvm/Transforms/Utils/BasicBlockUtils.h"
 
+#define DEBUG_TYPE "dce-pass"
+
 using namespace llvm;
 
 namespace dce {
@@ -106,7 +108,7 @@ llvm::PassPluginLibraryInfo getDCEPassPluginInfo() {
             PB.registerPipelineParsingCallback(
                 [&](StringRef Name, FunctionPassManager &FPM, ArrayRef<PassBuilder::PipelineElement>) {
                   if (Name == "dce-pass") {
-                    FPM.addPass(DeadCodeElimPass());
+                    FPM.addPass(dce::DeadCodeElimPass());
                     return true;
                   }
                   return false;

@@ -145,11 +145,11 @@ llvm::PassPluginLibraryInfo getArithObfuscatorsPluginInfo() {
             PB.registerPipelineParsingCallback(
                 [&](StringRef Name, FunctionPassManager &FPM, ArrayRef<PassBuilder::PipelineElement>) {
                   if (Name == "mba-sub") {
-                    FPM.addPass(MBASubTransform());
+                    FPM.addPass(obfuscator::MBASubTransform());
                     return true;
                   }
                   else if (Name == "mba-add") {
-                    FPM.addPass(MBAAddTransform());
+                    FPM.addPass(obfuscator::MBAAddTransform());
                     return true;
                   }
                   return false;

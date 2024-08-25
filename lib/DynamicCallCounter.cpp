@@ -157,7 +157,7 @@ llvm::PassPluginLibraryInfo getDynamicCallCounterPluginInfo() {
             PB.registerPipelineParsingCallback(
                 [&](StringRef Name, ModulePassManager &MPM, ArrayRef<PassBuilder::PipelineElement>) {
                   if (Name == "dynamic-cc") {
-                    MPM.addPass(DynamicCallCounter());
+                    MPM.addPass(dynamicallc::DynamicCallCounter());
                     return true;
                   }
                   return false;

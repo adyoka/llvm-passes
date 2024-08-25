@@ -16,10 +16,14 @@
 #include "llvm/IR/PassManager.h"
 #include "llvm/Pass.h"
 
-class DeadCodeElimPass : public PassInfoMixin<DeadCodeElimPass> {
-    llvm::PreservedAnalyses run(Function &F, FunctionAnalysisManager &FAM);
+namespace dce {
 
+class DeadCodeElimPass : public llvm::PassInfoMixin<DeadCodeElimPass> {
+public:
+    llvm::PreservedAnalyses run(llvm::Function &F, llvm::FunctionAnalysisManager &FAM);
     static bool isRequired() { return true; }
 };
+
+}
 
 #endif
